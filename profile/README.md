@@ -176,11 +176,30 @@ A persistent plan-keeper reconciles the live org state against the plan every 15
 
 ---
 
+## Program ownership
+
+Every repository in this organization has a single human owner (`@emmanuel-a-otchere`) and one persistent sub-agent that proposes and prepares changes.
+
+**`manny-es`** is the dedicated sub-agent responsible for `Enterprise-Semantics`. It runs as a Hermes cronjob (job id `c0b35d4938af`) on the `coder` profile and posts a daily check-in to the home Discord channel. To fire an immediate check-in:
+
+```bash
+cronjob action=run job_id=c0b35d4938af
+```
+
+A sibling agent, `es-plan-keeper` (job id `434b5c9c3023`), runs every 15 minutes and detects drift between the live org state and the program plan. `manny-es` consumes the keeper's reports and decides whether to fix, flag, or escalate. The two agents cooperate, never duplicate.
+
+| Agent | Cadence | Purpose |
+|-------|---------|---------|
+| `es-plan-keeper` | every 15 minutes | Drift detection only. Read-only against GitHub. |
+| `manny-es` | daily + on-demand | Daily check-in, decision surfacing, change preparation. Resolves keeper drift. |
+
+All commits are authored by `@emmanuel-a-otchere`. `manny-es` is the proposer; the human is the approver. See the [CONTRIBUTING.md](https://github.com/Enterprise-Semantics/.github/blob/main/CONTRIBUTING.md) for the full governance workflow.
+
 ## License
 
 Apache License 2.0. See [LICENSE](https://github.com/Enterprise-Semantics/.github/blob/main/LICENSE).
 
 ## Related foundations
 
-- [World Semantic Foundation](https://github.com/World-Semantic-Foundation) — upstream foundational semantics.
-- [OpenDEA](https://github.com/OpenDEAM) — downstream enterprise architecture metamodel.
+- [World Semantic Foundation](https://github.com/World-Semantic-Foundation) ;;; upstream foundational semantics.
+- [OpenDEA](https://github.com/OpenDEAM) ;;; downstream enterprise architecture metamodel.
