@@ -6,6 +6,14 @@ Enterprise Semantics is an independent GitHub organization that fills the layer 
 
 ---
 
+## Canonical URL notice
+
+> **Canonical organization:** https://github.com/Enterprise-Semantics
+>
+> An earlier organization name `Enterprise-Concepts-Model` was created and is preserved as an empty shell for historical reference. All authoritative assets, governance, decisions, and semantic artifacts live on `Enterprise-Semantics`. If you arrived from an `Enterprise-Concepts-Model` link, you are in the right place.
+
+---
+
 ## Why the organization exists
 
 The work undertaken across the Agentic Enterprise, Agentic Operations, Value Stream, Capability, Autonomous Operations, and related investigations has produced a growing body of enterprise concepts. Their precise meaning, specialization, composition, and relationships require continued investigation before they are suitable for incorporation into authoritative metamodels.
