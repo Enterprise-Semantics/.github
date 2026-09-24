@@ -31,7 +31,7 @@ A **Finding** captures a hypothesis from existing work. An **ADR** (Architecture
 | ADR, CR, Finding, workflow template | `enterprise-semantics-governance` |
 | Human-readable documentation | `enterprise-semantics-docs` |
 | Worked enterprise model, reference application | `enterprise-semantics-examples` |
-| Mapping (ES ;;; WSF, ES ;;; OpenDEA, ES ;;; DEA Catalogs) | `enterprise-semantics-mappings` |
+| Mapping to WSF, OpenDEA, and DEA Catalogs | `enterprise-semantics-mappings` |
 | Diagram source (PlantUML/Mermaid/SVG) | `enterprise-semantics-visuals` |
 | Conformance test, schema, validation harness | `enterprise-semantics-test-probe` |
 
@@ -45,7 +45,7 @@ The `enterprise-semantics-governance` repository hosts the canonical templates:
 - ADR template: `docs/adr/0000-template.md`
 - CR template: `docs/cr/0000-template.md`
 
-All three templates are dash-normalized: en-dash (–) and em-dash (—) become colons (:) or semicolons (;). Original sources that predate the rule stay verbatim in the local working workspace under `00_inbox/`.
+All three templates follow the project punctuation rule: en-dash and em-dash characters are not used in authored content. Colons and semicolons are used consistently instead. Original sources that predate the rule stay verbatim in the local working workspace under `00_inbox/`.
 
 ## Pull request process
 
@@ -79,12 +79,13 @@ The harness verifies:
 
 A failing harness is a blocker. Fix the source, not the harness.
 
-## Style and language
+## Contribution standards
 
-- All normative documents use **spec tone** (no "We should..." or first-person narration in body prose).
-- En-dash (–) and em-dash (–) **do not appear** in newly authored content. Use colons (:) or semicolons (;) consistently.
-- Every concept carries: `id`, `canonical_name`, `definition`, `status`, `provenance`. `relationships`, `aliases`, and `classifications` where applicable.
-- Every relationship carries: `id`, `subject`, `predicate`, `object`, `status`, `provenance`, `rationale`. `inverse` where applicable.
+- All normative documents use **spec tone**: no first-person narration in body prose.
+- Punctuation follows the project rule: en-dash and em-dash characters are not used in authored content; colons and semicolons are used consistently instead.
+- Every concept carries `id`, `canonical_name`, `definition`, `status`, and `provenance`. Optional fields (`relationships`, `aliases`, `classifications`) are included where applicable.
+- Every relationship carries `id`, `subject`, `predicate`, `object`, `status`, `provenance`, and `rationale`. The `inverse` field is included where applicable.
+
 
 ## Reporting issues
 
