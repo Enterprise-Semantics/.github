@@ -24,7 +24,7 @@ Putting them directly into OpenDEA would make an architectural implementation de
 
 ## Architectural outcome
 
-```text
+```
                      WSF
                       : foundation grounding
                       v
@@ -47,7 +47,7 @@ Putting them directly into OpenDEA would make an architectural implementation de
 
 The semantic development loop:
 
-```text
+```
 Existing Knowledge
        : ↓
 Finding
@@ -76,7 +76,7 @@ New Finding
 ## Authority boundary
 
 | Authority | Primary responsibility |
-|-----------|------------------------|
+| --- | --- |
 | **WSF** | World / foundational semantics |
 | **Enterprise Semantics** | Enterprise-level semantic definitions and relationships |
 | **OpenDEA** | Enterprise architecture metamodel and architectural representation |
@@ -88,16 +88,25 @@ The arrows in the architecture represent semantic reference, specialization, ali
 
 ## Repositories
 
-| Repository | Purpose |
-|------------|---------|
-| [enterprise-semantics](https://github.com/Enterprise-Semantics/enterprise-semantics) | The semantic authority repository. Structured semantic source (YAML/JSON): concepts, relationships, identifier registry. Single source of truth. |
-| [enterprise-semantics-spec](https://github.com/Enterprise-Semantics/enterprise-semantics-spec) | Normative specifications: identifier scheme, relationship vocabulary, lifecycle model, conformance requirements, serialization formats. |
-| [enterprise-semantics-governance](https://github.com/Enterprise-Semantics/enterprise-semantics-governance) | ADRs, CRs, Findings, workflow templates. Where Enterprise Semantics is governed, not just described. |
-| [enterprise-semantics-docs](https://github.com/Enterprise-Semantics/enterprise-semantics-docs) | Human-readable documentation; generated where possible from `enterprise-semantics`. |
-| [enterprise-semantics-examples](https://github.com/Enterprise-Semantics/enterprise-semantics-examples) | Worked enterprise models and reference applications. |
-| [enterprise-semantics-mappings](https://github.com/Enterprise-Semantics/enterprise-semantics-mappings) | Bi-directional mappings: ES ;;; WSF, ES ;;; OpenDEA, ES ;;; DEA Catalogs. |
-| [enterprise-semantics-visuals](https://github.com/Enterprise-Semantics/enterprise-semantics-visuals) | PlantUML/Mermaid/SVG sources; reproducible architectural diagrams. |
-| [enterprise-semantics-test-probe](https://github.com/Enterprise-Semantics/enterprise-semantics-test-probe) | Conformance harness: schema validation, ID uniqueness, broken-reference check, mapping integrity. |
+The Enterprise-Semantics organization consists of 8 core repositories that form a cohesive semantic authority system:
+
+### Core Semantic Authority
+
+| Repository | Purpose | Status |
+| --- | --- | --- |
+| **[enterprise-semantics](https://github.com/Enterprise-Semantics/enterprise-semantics)** | The semantic authority repository. Structured semantic source (YAML/JSON): concepts, relationships, identifier registry. Single source of truth. | Active; 64 commits; v0.1.0-seed released; 16 concept records (Candidate + Established mix); 33 governed predicates; conformance harness implemented |
+| **[enterprise-semantics-spec](https://github.com/Enterprise-Semantics/enterprise-semantics-spec)** | Normative specifications: identifier scheme, relationship vocabulary, lifecycle model, conformance requirements, serialization formats. | Skeleton (v0.0.1); specifications land after ADR-ES-001 in Phase 3 |
+| **[enterprise-semantics-governance](https://github.com/Enterprise-Semantics/enterprise-semantics-governance)** | ADRs, CRs, Findings, workflow templates. Where Enterprise Semantics is governed, not just described. | Active; 104 commits; PLAN.md at v3.0.0; multiple ADRs and CRs filed and accepted |
+
+### Supporting Repositories
+
+| Repository | Purpose | Status |
+| --- | --- | --- |
+| **[enterprise-semantics-docs](https://github.com/Enterprise-Semantics/enterprise-semantics-docs)** | Human-readable documentation; generated where possible from `enterprise-semantics`. | Active; 34 commits; 5 content tranches landed; conceptual guides, architecture docs, relationship docs |
+| **[enterprise-semantics-examples](https://github.com/Enterprise-Semantics/enterprise-semantics-examples)** | Worked enterprise models and reference applications. | Active; 24 commits; 3 example tranches; canonical enterprise model, Agentic Value Stream examples |
+| **[enterprise-semantics-mappings](https://github.com/Enterprise-Semantics/enterprise-semantics-mappings)** | Bi-directional mappings: ES ↔ WSF, ES ↔ OpenDEA, ES ↔ DEA Catalogs. | Active; 28 commits; 2 mapping tranches; WSF and OpenDEA mappings established |
+| **[enterprise-semantics-visuals](https://github.com/Enterprise-Semantics/enterprise-semantics-visuals)** | PlantUML/Mermaid/SVG sources; reproducible architectural diagrams. | Active; 25 commits; 6 content tranches; 7 architectural diagrams from FND-ES-000 |
+| **[enterprise-semantics-test-probe](https://github.com/Enterprise-Semantics/enterprise-semantics-test-probe)** | Conformance harness: schema validation, ID uniqueness, broken-reference check, mapping integrity. | Active; 35 commits; CI gate implemented; 5/5 schema tests passing; per-concept test kits |
 
 The semantic authority lives in **`enterprise-semantics`**. The other repositories support publication, governance, mapping, examples, and presentation: not six competing sources of truth, but one authority plus its supporting repositories.
 
@@ -107,7 +116,7 @@ The semantic authority lives in **`enterprise-semantics`**. The other repositori
 
 ### Human
 
-A person should be able to navigate **concept ;;; definition ;;; relationships ;;; rationale ;;; sources ;;; mappings ;;; examples** without having to understand the underlying data representation.
+A person should be able to navigate **concept → definition → relationships → rationale → sources → mappings → examples** without having to understand the underlying data representation.
 
 ### Machine
 
@@ -121,7 +130,7 @@ A machine should be able to retrieve **concept_id, canonical_name, definition, s
 
 A concept moves through lifecycle states. The seed initially holds concepts at `Candidate` status, with explicit provenance. Promotion to `Investigating`, `Proposed`, `Established`, `Canonical`, `Mapped`, `Deprecated`, or `Retired` happens through the governance sequence.
 
-```text
+```
 Candidate
    ↓
 Investigating
@@ -137,18 +146,17 @@ Mapped
 Deprecated / Retired
 ```
 
-> **Seed ;;; Canonical.**
-> **Published ;;; Normative.**
+> **Seed → Canonical.** **Published → Normative.**
 
 Authority requires the appropriate semantic lifecycle state.
 
 ---
 
-## Contributing
+## Governance workflow
 
 The organization follows a governed workflow:
 
-```text
+```
 Finding   : candidate hypotheses from existing work
    ↓
 ADR       : governed architectural decision (in enterprise-semantics-governance)
@@ -162,7 +170,15 @@ CI        : conformance + schema validation
 Release   : semantic version tag on the authority repository
 ```
 
-See [CONTRIBUTING.md](https://github.com/Enterprise-Semantics/.github/blob/main/CONTRIBUTING.md) for the full process and templates.
+### Governance artifacts
+
+| Artifact | Location | Purpose |
+| --- | --- | --- |
+| **Finding** | `enterprise-semantics-governance/docs/finding/` | Captures a hypothesis or investigation result from existing work. Lives verbatim. |
+| **ADR** | `enterprise-semantics-governance/docs/adr/` | Governs an architectural decision. Once merged, ADRs are immutable; supersession requires a new ADR. |
+| **CR** | `enterprise-semantics-governance/docs/cr/` | Implements an ADR or an independent scope change. Carries a status field. |
+
+See CONTRIBUTING.md for the full process and templates.
 
 ---
 
@@ -174,11 +190,13 @@ This organization follows one rule for punctuation in normative documentation:
 
 Original sources that predate the rule (for example the founding findings) are preserved verbatim in the working workspace; only newly authored normative documents follow the rule.
 
+Commit messages follow `<type>: <imperative description>`.
+
 ---
 
 ## Program plan
 
-The current state of every repo, phase, and decision is tracked in [`plans/PLAN.md`](https://github.com/Enterprise-Semantics/enterprise-semantics-governance/blob/main/docs/plan/PLAN.md) (currently staged in the local working folder until `enterprise-semantics-governance` lands).
+The current state of every repo, phase, and decision is tracked in `docs/plan/PLAN.md` in the `enterprise-semantics-governance` repository.
 
 A persistent plan-keeper reconciles the live org state against the plan every 15 minutes and surfaces drift only when it occurs.
 
@@ -197,17 +215,122 @@ cronjob action=run job_id=c0b35d4938af
 A sibling agent, `es-plan-keeper` (job id `434b5c9c3023`), runs every 15 minutes and detects drift between the live org state and the program plan. `manny-es` consumes the keeper's reports and decides whether to fix, flag, or escalate. The two agents cooperate, never duplicate.
 
 | Agent | Cadence | Purpose |
-|-------|---------|---------|
+| --- | --- | --- |
 | `es-plan-keeper` | every 15 minutes | Drift detection only. Read-only against GitHub. |
 | `manny-es` | daily + on-demand | Daily check-in, decision surfacing, change preparation. Resolves keeper drift. |
 
-All commits are authored by `@emmanuel-a-otchere`. `manny-es` is the proposer; the human is the approver. See the [CONTRIBUTING.md](https://github.com/Enterprise-Semantics/.github/blob/main/CONTRIBUTING.md) for the full governance workflow.
+All commits are authored by `@emmanuel-a-otchere`. `manny-es` is the proposer; the human is the approver. See the CONTRIBUTING.md for the full governance workflow.
+
+---
+
+## Key features
+
+### Structured semantic source
+
+The `enterprise-semantics` repository maintains structured YAML/JSON records that capture:
+- Concept definitions with stable identifiers
+- Relationships with governed predicate vocabulary
+- Lifecycle status tracking
+- Provenance registries (sources, findings, decisions)
+- Version pointers for semantic releases
+
+### Conformance validation
+
+The `enterprise-semantics-test-probe` validates:
+- Unique concept identifiers across the seed
+- Valid names and required definitions
+- Valid relationship types and inverse relationships
+- No broken references
+- Valid lifecycle state values
+- Provenance completeness
+- Mapping integrity
+- Schema conformance (YAML/JSON records conform to published schemas)
+- Version consistency
+- Generated artifact consistency
+
+### Bi-directional mappings
+
+The `enterprise-semantics-mappings` repository maintains governed assertions (not copies) between:
+- **WSF** (upstream): grounded-by, aligned-with, specializes, references
+- **OpenDEA** (downstream): maps-to, represented-by, specializes, profile-of
+- **DEA Catalogs** (instances): instance-level mappings
+
+Each mapping carries source/target identifiers, direction, predicate, status, and provenance.
+
+### Reproducible visuals
+
+The `enterprise-semantics-visuals` repository holds PlantUML/Mermaid/SVG sources for:
+- Architecture diagrams
+- Lifecycle flows
+- Semantic maps
+- Comparative scenarios
+- Application examples
+
+Renders (PNG/SVG) are generated from sources; never hand-edit renders.
+
+---
+
+## Current state (as of September 2026)
+
+### Released versions
+- **v0.1.0-seed**: First Enterprise-Semantics seed release (September 3, 2026)
+
+### Active semantic domains
+- **Value Stream**: 13 governed predicates (v0.2.0)
+- **Capability**: 9 governed predicates (v0.1.0)
+- **Agentic**: 11 governed predicates (v0.3.0)
+- **Total**: 33 governed predicates (v0.4.0)
+
+### Concept inventory
+- 16 concept records in various lifecycle states (Candidate + Established mix)
+- Profile families for disposition handling (AI Agent, Agentic AI, AIOps, MLOps, etc.)
+- Stable identifier scheme: `ES:<KIND>:<NAME>`
+
+### Governance maturity
+- Multiple ADRs filed and accepted (ADR-ES-001 through ADR-ES-010+)
+- Change Requests implemented across multiple tranches
+- Program plan at v3.0.0 with Phase 5 completed
+
+---
 
 ## License
 
-Apache License 2.0. See [LICENSE](https://github.com/Enterprise-Semantics/.github/blob/main/LICENSE).
+Apache License 2.0. See LICENSE.
+
+---
 
 ## Related foundations
 
-- [World Semantic Foundation](https://github.com/World-Semantic-Foundation) ;;; upstream foundational semantics.
-- [OpenDEA](https://github.com/OpenDEAM) ;;; downstream enterprise architecture metamodel.
+- [World Semantic Foundation](https://github.com/World-Semantic-Foundation): upstream foundational semantics
+- [OpenDEA](https://github.com/OpenDEA): downstream enterprise architecture metamodel
+
+---
+
+## Contributing
+
+Contributions follow the governed workflow outlined above. See each repository's CONTRIBUTING.md for specific guidelines. All governance documents follow the dash-normalization rule (colons/semicolons only, no en-dash or em-dash).
+
+Key principles:
+- **Source of truth**: Structured semantic source (YAML/JSON) is authoritative, not Markdown
+- **Stable identity**: Every concept carries a stable identifier independent of filename or display name
+- **Governed change**: All semantic changes require ADR + CR approval
+- **Conformance first**: All contributions must pass the test-probe validation
+
+---
+
+## Getting started
+
+### For humans
+1. Browse [enterprise-semantics-docs](https://github.com/Enterprise-Semantics/enterprise-semantics-docs) for conceptual guides
+2. Explore [enterprise-semantics-examples](https://github.com/Enterprise-Semantics/enterprise-semantics-examples) for worked examples
+3. Review [enterprise-semantics-governance](https://github.com/Enterprise-Semantics/enterprise-semantics-governance) for decision history
+
+### For machines
+1. Clone [enterprise-semantics](https://github.com/Enterprise-Semantics/enterprise-semantics) for structured semantic source
+2. Validate against schemas in `schema/` directory
+3. Run conformance checks via [enterprise-semantics-test-probe](https://github.com/Enterprise-Semantics/enterprise-semantics-test-probe)
+4. Query mappings from [enterprise-semantics-mappings](https://github.com/Enterprise-Semantics/enterprise-semantics-mappings)
+
+---
+
+*Last updated: September 29, 2026*
