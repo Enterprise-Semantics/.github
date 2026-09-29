@@ -47,28 +47,27 @@ Putting them directly into OpenDEA would make an architectural implementation de
 
 The semantic development loop:
 
-```
-Existing Knowledge
-       : ↓
-Finding
-       : ↓                       (candidate hypotheses)
-ADR
-       : ↓                       (governed decision)
-CR
-       : ↓                       (implementable change)
-Implementation
-       : ↓
-CI
-       : ↓
-Published Semantic Version
-       : ↓
-Reference / Mapping
-       : ↓
-Downstream Use
-       : ↓
-New Finding
-       : ↑
-       back to the top of the loop
+```mermaid
+graph LR
+    subgraph Governance
+    B[Finding] --> C[ADR]
+    C --> D[CR]
+    end
+    
+    subgraph Execution
+    D --> E[Implementation]
+    E --> F[CI]
+    F --> G[Published Version]
+    end
+    
+    subgraph Usage
+    G --> H[Downstream Use]
+    H -->|New Finding| B
+    end
+    
+    style B fill:#e1f5fe
+    style G fill:#e1f5fe
+    style H fill:#e1f5fe
 ```
 
 ---
