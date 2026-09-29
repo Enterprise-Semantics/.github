@@ -158,13 +158,13 @@ The organization follows a governed workflow:
 ```
 Finding   : candidate hypotheses from existing work
    ↓
-ADR       : governed architectural decision (in enterprise-semantics-governance)
+  ADR       : governed architectural decision (in enterprise-semantics-governance)
    ↓
-CR        : change request against the implementation (in enterprise-semantics-governance)
+  CR        : change request against the implementation (in enterprise-semantics-governance)
    ↓
-PR        : pull request against the target repository
+  PR        : pull request against the target repository
    ↓
-CI        : conformance + schema validation
+  CI        : conformance + schema validation
    ↓
 Release   : semantic version tag on the authority repository
 ```
