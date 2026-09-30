@@ -40,7 +40,7 @@ jobs:
           DRY_RUN: ${{ inputs.dry_run }}
         run: |
           set -e
-          CONCEPT_REPO="Enterprise-Semantics/concept-${SLUG}"
+          CONCEPT_REPO="Enterprise-Semantics/${SLUG}"
           TMP=$(mktemp -d)
           cd "$TMP"
           gh repo clone "$CONCEPT_REPO" concept -- --depth 1
@@ -101,7 +101,7 @@ jobs:
           for SLUG in $SLUGS; do
             echo "=== $SLUG ==="
             # (same logic as single slug - abbreviated here; in production this is a matrix job)
-            CONCEPT_REPO="Enterprise-Semantics/concept-${SLUG}"
+            CONCEPT_REPO="Enterprise-Semantics/${SLUG}"
             if gh workflow run sync-concept-repos.yml -f "slug=${SLUG}" -f "dry_run=${DRY_RUN}" 2>/dev/null; then
               echo "Triggered"
             fi
