@@ -205,7 +205,7 @@ A persistent plan-keeper reconciles the live org state against the plan every 15
 
 Every repository in this organization has a single human owner (`@emmanuel-a-otchere`) and one persistent sub-agent that proposes and prepares changes.
 
-**`manny-es`** is the dedicated sub-agent responsible for `Enterprise-Semantics`. It runs as a Hermes cronjob (job id `c0b35d4938af`) on the `coder` profile and posts a daily check-in to the home Discord channel. To fire an immediate check-in:
+**`manny-es`** is the dedicated specialist responsible for `Enterprise-Semantics`. We run a cronjob (job id `c0b35d4938af`) on a profile and post a daily check-in. To fire an immediate check-in:
 
 ```bash
 cronjob action=run job_id=c0b35d4938af
